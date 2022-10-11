@@ -27,5 +27,9 @@ model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']
 model.fit(X, y, epochs=150, batch_size=10)
 # evaluate the keras model
 _, accuracy = model.evaluate(X, y)
-print('Accuracy: %.2f' % (accuracy*100))
-
+print('Accuracy: %.2f' % (accuracy * 100))
+# make class predictions with the model
+predictions = (model.predict(X) > 0.5).astype(int)
+# summarize the first 5 cases
+for i in range(5):
+    print('%s => %d (expected %d)' % (X[i].tolist(), predictions[i], y[i]))
